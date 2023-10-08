@@ -9,7 +9,7 @@ public class JDBCHelper {
         SQLServerDataSource dataSource = new SQLServerDataSource();
 
         dataSource.setUser("sa");
-        dataSource.setDatabaseName("EduSys");
+        dataSource.setDatabaseName("Polypro");
         dataSource.setPassword("1711");
         dataSource.setPortNumber(1433);
         dataSource.setEncrypt(false);
@@ -67,5 +67,8 @@ public class JDBCHelper {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    public static void main(String[] args) {
+        System.out.println(getconConnection());
     }
 }

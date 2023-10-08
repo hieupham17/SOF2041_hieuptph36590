@@ -10,7 +10,7 @@ public class ChuyenDeDAO extends EduSysDAO<ChuyenDe, String> {
 
     String insert_sql = "INSERT INTO CHUYENDE(MaCD, TENCD, HOCPHI, THOILUONG, HINH, MOTA) values(?,?,?,?,?,?) ";
     String update_sql = "UPDATE CHUYENDE SET TENCD = ?, HOCPHI = ?, THOILUONG = ?, HINH = ?, MOTA = ?  WHERE  (MACD = ?)";
-    String delete_sql = "DELETE FROM CHUYENDE WHERE  (MACD = ?)";
+    String delete_sql = "DELETE FROM CHUYENDE WHERE MACD = ?";
     String select_all_sql = "SELECT * FROM CHUYENDE";
     String selectByIDSQL = "SELECT * FROM CHUYENDE WHERE MACD = ?";
 
@@ -44,7 +44,7 @@ public class ChuyenDeDAO extends EduSysDAO<ChuyenDe, String> {
     }
 
     @Override
-    public List selectAll() {
+    public List<ChuyenDe> selectAll() {
         return this.selectBySQL(select_all_sql);
     }
 

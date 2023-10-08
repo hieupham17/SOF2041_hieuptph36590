@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.edusys.dao;
 
 import com.edusys.entity.NguoiHoc;
@@ -90,15 +86,20 @@ public class NguoiHocDAO extends EduSysDAO<NguoiHoc, String> {
 
             }
             rs.getStatement().getConnection().close();
+            return listNH;
         } catch (Exception e) {
             throw new RuntimeException();
         }
-        return listNH;
     }
 
-    public List<NguoiHoc> selectByKeyWord(String keyWord) { 
+    public List<NguoiHoc> selectByKeyWord(String keyWord) {
         String sql = "SELECT * FROM NGUOIHOC WHERE  HOTEN LIKE ?";
         return this.selectBySQL(sql, "%" + keyWord + "%");
 
+    }
+
+    public List<NguoiHoc> selectNotInCourse(Integer maKH, String keyWord) {
+        String sql = "select * from NguoiHoc where HoTen like ? and MaNH not in (select MaNH from HocVien where MaKH = ? )";        
+        return this.selectBySQL(sql, "%" + keyWord + "%", maKH);
     }
 }

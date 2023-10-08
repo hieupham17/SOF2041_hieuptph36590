@@ -38,6 +38,18 @@ public class NguoiHoc {
         this.ngayDK = ngayDK;
     }
 
+    public NguoiHoc(String hoTen, Date ngaySinh, boolean gioiTinh, String dienThoai, String email, String ghiChu, String maNV, Date ngayDK) {
+        this.hoTen = hoTen;
+        this.ngaySinh = ngaySinh;
+        this.gioiTinh = gioiTinh;
+        this.dienThoai = dienThoai;
+        this.email = email;
+        this.ghiChu = ghiChu;
+        this.maNV = maNV;
+        this.ngayDK = ngayDK;
+    }
+    
+
     public String getMaNH() {
         return maNH;
     }

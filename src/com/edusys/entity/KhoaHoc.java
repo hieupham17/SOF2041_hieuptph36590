@@ -4,6 +4,7 @@
  */
 package com.edusys.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -95,5 +96,10 @@ public class KhoaHoc {
     public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
     }
-    
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return maCD + "(" + sdf.format(ngayKG) + ")";
+    }
+  
 }

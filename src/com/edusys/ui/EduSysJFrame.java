@@ -138,6 +138,11 @@ public class EduSysJFrame extends javax.swing.JFrame {
         btnHuongDan1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnHuongDan1.setMargin(new java.awt.Insets(2, 10, 2, 10));
         btnHuongDan1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnHuongDan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuongDan1ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnHuongDan1);
 
         btnHuongDan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/edusys/Hinh/Globe.png"))); // NOI18N
@@ -470,6 +475,11 @@ public class EduSysJFrame extends javax.swing.JFrame {
         this.openDoiMatKhau();
     }//GEN-LAST:event_mniDoiMatKhauActionPerformed
 
+    private void btnHuongDan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuongDan1ActionPerformed
+        // TODO add your handling code here:
+        this.openHocVien(   );
+    }//GEN-LAST:event_btnHuongDan1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -602,7 +612,7 @@ public class EduSysJFrame extends javax.swing.JFrame {
     }
 
     void openHocVien() {
-        new QuanLyHocVienJDialog(this, true).setVisible(true);
+        new HocVienJDialog(this, true).setVisible(true);
     }
 
     void openThongKe(int index) {

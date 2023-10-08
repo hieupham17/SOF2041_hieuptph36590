@@ -92,7 +92,7 @@ public class KhoaHocDAO extends EduSysDAO<KhoaHoc, String> {
     }
 
     public List<KhoaHoc> selectByChuyenDe(String maCD) {
-        String sql = "SELECT * FROM KhoaHoc WHERE MaCD=?";
+        String sql = "SELECT * FROM KhoaHoc WHERE MaCD = ?";
         return this.selectBySQL(sql, maCD);
     }
 
