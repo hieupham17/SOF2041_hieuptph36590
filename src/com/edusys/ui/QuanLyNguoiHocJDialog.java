@@ -561,7 +561,7 @@ public class QuanLyNguoiHocJDialog extends javax.swing.JDialog {
     }
 
     void insert() {
-        NguoiHoc nh = new NguoiHoc();
+        NguoiHoc nh = getFormData();
         try {
             dao.insert(nh);
             fillTable();
@@ -574,7 +574,7 @@ public class QuanLyNguoiHocJDialog extends javax.swing.JDialog {
     }
 
     void update() {
-        NguoiHoc nh = getForm();
+        NguoiHoc nh = getFormData();
         try {
             dao.update(nh);
             this.fillTable();
@@ -645,24 +645,24 @@ public class QuanLyNguoiHocJDialog extends javax.swing.JDialog {
         updateStatus();
     }
 
-    NguoiHoc getForm() { //7
-        NguoiHoc nh = new NguoiHoc();
-        nh.setMaNH(txtMaNH.getText());
-        nh.setHoTen(txtHoTen.getText());
-
-        nh.setDienThoai(txtMaNH.getText());
-        nh.setGhiChu(txtHoTen.getText());
-        nh.setNgaySinh(XDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"));
-        nh.setEmail(txtHoTen.getText());
-        String gt = "";
-        if (rdoNam.isSelected()) {
-            nh.setGioiTinh(true);
-        } else {
-            nh.setGioiTinh(false);
-        }
-        return nh;
-
-    }
+//    NguoiHoc getForm() { //7
+//        NguoiHoc nh = new NguoiHoc();
+//        nh.setMaNH(txtMaNH.getText());
+//        nh.setHoTen(txtHoTen.getText());
+//
+//        nh.setDienThoai(txtMaNH.getText());
+//        nh.setGhiChu(txtHoTen.getText());
+//        nh.setNgaySinh(XDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"));
+//        nh.setEmail(txtHoTen.getText());
+//        String gt = "";
+//        if (rdoNam.isSelected()) {
+//            nh.setGioiTinh(true);
+//        } else {
+//            nh.setGioiTinh(false);
+//        }
+//        return nh;
+//
+//    }
 
     NguoiHoc getFormData() {
         NguoiHoc nh = new NguoiHoc();
@@ -677,20 +677,16 @@ public class QuanLyNguoiHocJDialog extends javax.swing.JDialog {
         }
         nh.setMaNH(txtMaNH.getText());
         nh.setHoTen(txtHoTen.getText());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date date = null;
-        java.util.Date ndk = null;
-        try {
-            date = dateFormat.parse(ngaysinh);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        nh.setNgaySinh(XDate.toDate(ngaysinh, "yyyy-MM-dd"));
 
         nh.setGioiTinh(rdoNam.isSelected());
         nh.setDienThoai(txtDienThoai.getText());
         nh.setEmail(txtEmail.getText());
         nh.setGhiChu(txtGhiChu.getText());
+         if (Auth.user != null) {
+            // Lấy mã người thêm từ tài khoản khi đăng nhập
+            nh.setMaNV(Auth.user.getMaNV());
+        }
         nh.setNgayDK(new java.sql.Date(System.currentTimeMillis()));//ngày hiện tại set ngày dk
         return nh;
     }

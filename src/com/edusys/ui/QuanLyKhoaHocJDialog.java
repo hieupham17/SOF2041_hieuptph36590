@@ -8,8 +8,11 @@ import com.edusys.dao.ChuyenDeDAO;
 import com.edusys.dao.KhoaHocDAO;
 import com.edusys.entity.ChuyenDe;
 import com.edusys.entity.KhoaHoc;
+import com.edusys.entity.NhanVien;
 import com.edusys.utils.MsgBox;
 import com.edusys.utils.XDate;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -454,8 +457,11 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
     }
 
     void chonChuyenDe() {
+
+        
         ChuyenDe cd = (ChuyenDe) cbbChuyenDe.getSelectedItem();
         txtThoiLuong.setText(String.valueOf(cd.getThoiLuong()));
+        //txtNguoiTao.setText();
         txtHocPhi.setText(String.valueOf(cd.getHocPhi()));
         txtChuyenDe.setText(cd.getTenChuyenDe());
         txtGhiChu.setText(cd.getTenChuyenDe());
@@ -490,8 +496,6 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
         }
 
     }
-
-
 
     void edit() {
         String maKH = tblGridView.getValueAt(row, 0).toString();
@@ -538,10 +542,22 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
 
     KhoaHoc getForm() {
         KhoaHoc kh = new KhoaHoc();
-        kh.setNgayKG(XDate.toDate(txtNgayKhaiGiang.getText(), "yyyy-MM-dd"));
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Date date;
         kh.setGhiChu(txtGhiChu.getText());
+        kh.setHocPhi(Double.valueOf(txtHocPhi.getText()));
+        kh.setMaCD(txtChuyenDe.getText());
+        kh.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
+        try {
+            kh.setNgayKG(XDate.toDate(txtNgayKhaiGiang.getText(), "dd-MM-yyyy"));
+            date = format.parse(txtNgayTao.getText());
+            kh.setNgayTao(new java.sql.Date(date.getTime()));
+        } catch (Exception e) {
+             MsgBox.alert(this, "Định dạng ngày tháng sai!");
+       e.printStackTrace();
+        }
+  kh.setMaNV(txtNguoiTao.getText());
         return kh;
-
     }
 
     void insert() {

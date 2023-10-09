@@ -498,7 +498,7 @@ public class QuanLyChuyenDeJDialog extends javax.swing.JDialog {
         cd.setMaCD(txtMaChuyenDe.getText());
         cd.setTenChuyenDe(txtTenChuyenDe.getText());
         cd.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
-        cd.setHocPhi(Double.valueOf(txtMaChuyenDe.getText()));
+        cd.setHocPhi(Double.valueOf(txtHocPhi.getText()));
         cd.setMoTa(txtMoTa.getText());
         cd.setHinh(lblHinh.getToolTipText());
         return cd;

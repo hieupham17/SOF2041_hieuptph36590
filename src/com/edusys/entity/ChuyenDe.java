@@ -80,9 +80,5 @@ public class ChuyenDe {
     public String toString(){
         return this.tenChuyenDe;
     }
-//        @Override
-//    public boolean equals(Object obj) {
-//        ChuyenDe other = (ChuyenDe) obj;
-//        return other.getMaCD().equals(this.getMaCD());
-//    }
+    
 }
