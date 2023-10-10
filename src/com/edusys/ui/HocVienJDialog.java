@@ -14,6 +14,8 @@ import com.edusys.entity.KhoaHoc;
 import com.edusys.entity.NguoiHoc;
 import com.edusys.utils.Auth;
 import com.edusys.utils.MsgBox;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -58,12 +60,23 @@ public class HocVienJDialog extends javax.swing.JDialog {
         btnThemVaoKhoaHoc = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Chuyên đề");
 
         cbbChuyenDe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbChuyenDe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbbChuyenDeMouseClicked(evt);
+            }
+        });
+        cbbChuyenDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbChuyenDeActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Khoá học");
 
@@ -138,6 +151,8 @@ public class HocVienJDialog extends javax.swing.JDialog {
 
         jLabel5.setText("Tìm kiếm");
 
+        jButton1.setText("Tìm kiếm");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,9 +182,11 @@ public class HocVienJDialog extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
                                 .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(494, 494, 494)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(401, 401, 401)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -199,8 +216,9 @@ public class HocVienJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(24, 24, 24)
+                    .addComponent(jLabel5)
+                    .addComponent(jButton1))
+                .addGap(23, 23, 23)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnThemVaoKhoaHoc)
@@ -224,6 +242,23 @@ public class HocVienJDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.add();
     }//GEN-LAST:event_btnThemVaoKhoaHocActionPerformed
+
+    private void cbbChuyenDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbChuyenDeActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cbbChuyenDeActionPerformed
+
+    private void cbbChuyenDeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbChuyenDeMouseClicked
+        // TODO add your handling code here:
+        cbbChuyenDe.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    fillComboBoxKhoaHoc();
+                }
+            }
+        });
+    }//GEN-LAST:event_cbbChuyenDeMouseClicked
 
     /**
      * @param args the command line arguments
@@ -273,6 +308,7 @@ public class HocVienJDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnXoaKhoiKhoaHoc;
     private javax.swing.JComboBox<String> cbbChuyenDe;
     private javax.swing.JComboBox<String> cbbKhoaHoc;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

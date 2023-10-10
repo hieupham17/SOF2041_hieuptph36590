@@ -19,8 +19,8 @@ public class HocVienDAO extends EduSysDAO<HocVien, Integer> {
     String insert_sql = "INSERT INTO HOCVIEN VALUES (?,?,?)";
     String update_sql = " UPDATE HOCVIEN SET Diem =? where mahv = ?";
     String delete_sql = "DELETE FROM HOCVIEN where mahv = ?";
-    String select_all_sql = "SELECT HOCVIEN * FROM HOCVIEN";
-    String selectByIDSQL = "SELECT HOCVIEN * FROM HOCVIEN where mahv = ?";
+    String select_all_sql = "SELECT * FROM HOCVIEN";
+    String selectByIDSQL = "SELECT  * FROM HOCVIEN where mahv = ?";
 
     @Override
     public void insert(HocVien entity) {

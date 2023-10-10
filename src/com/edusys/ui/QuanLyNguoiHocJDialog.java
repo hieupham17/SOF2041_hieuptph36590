@@ -645,25 +645,6 @@ public class QuanLyNguoiHocJDialog extends javax.swing.JDialog {
         updateStatus();
     }
 
-//    NguoiHoc getForm() { //7
-//        NguoiHoc nh = new NguoiHoc();
-//        nh.setMaNH(txtMaNH.getText());
-//        nh.setHoTen(txtHoTen.getText());
-//
-//        nh.setDienThoai(txtMaNH.getText());
-//        nh.setGhiChu(txtHoTen.getText());
-//        nh.setNgaySinh(XDate.toDate(txtNgaySinh.getText(), "yyyy-MM-dd"));
-//        nh.setEmail(txtHoTen.getText());
-//        String gt = "";
-//        if (rdoNam.isSelected()) {
-//            nh.setGioiTinh(true);
-//        } else {
-//            nh.setGioiTinh(false);
-//        }
-//        return nh;
-//
-//    }
-
     NguoiHoc getFormData() {
         NguoiHoc nh = new NguoiHoc();
         String maNH = txtMaNH.getText().trim();
