@@ -12,11 +12,11 @@ import java.sql.ResultSet;
  */
 public class KhoaHocDAO extends EduSysDAO<KhoaHoc, String> {
 
-    String insert_sql = "INSERT INTO KHOAHOC (MaCD, HocPhi, ThoiLuong, NgayKG, GhiChu, MaNV, NgayTao) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    String update_sql = " UPDATE KHOAHOC SET MaCD=?, HocPhi=?, ThoiLuong=?, NgayKG=?, GhiChu=?, MaNV=?, NgayTao=? WHERE MaKH=?";
-    String delete_sql = "DELETE FROM KHOAHOC WHERE MaKH=?";
-    String select_all_sql = "SELECT * FROM KHOAHOC";
-    String selectByIDSQL = "SELECT * FROM KHOAHOC WHERE MaKH=?";
+    String insert_sql = "INSERT INTO KhoaHoc (MaKH, MaCD, HocPhi, ThoiLuong, NgayKG, GhiChu, MaNV, NgayTao) VALUES (?,?,?,?,?,?,?,?)";
+    String update_sql = " UPDATE KhoaHoc SET MaCD =?, HocPhi =?, ThoiLuong =?, NgayKG =?, GhiChu =?, MaNV =?, NgayTao =? where MaKH = ?";
+    String delete_sql = "DELETE FROM KhoaHoc where MaKH = ?";
+    String select_all_sql = "select * from KhoaHoc";
+    String selectByIDSQL = "select * from KhoaHoc where MaKH = ?";
 
     @Override
     public void insert(KhoaHoc kh) {

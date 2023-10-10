@@ -8,7 +8,7 @@ import com.edusys.dao.ChuyenDeDAO;
 import com.edusys.dao.KhoaHocDAO;
 import com.edusys.entity.ChuyenDe;
 import com.edusys.entity.KhoaHoc;
-import com.edusys.entity.NhanVien;
+import com.edusys.utils.Auth;
 import com.edusys.utils.MsgBox;
 import com.edusys.utils.XDate;
 import java.text.SimpleDateFormat;
@@ -17,10 +17,6 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author admin
- */
 public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
 
     /**
@@ -445,6 +441,7 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         //fillTable();
         fillComboxChuyenDe();
+        this.setUser();
     }
 
     void fillComboxChuyenDe() { //đổ data vào cbb
@@ -458,12 +455,11 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
 
     void chonChuyenDe() {
 
-        
         ChuyenDe cd = (ChuyenDe) cbbChuyenDe.getSelectedItem();
         txtThoiLuong.setText(String.valueOf(cd.getThoiLuong()));
         //txtNguoiTao.setText();
         txtHocPhi.setText(String.valueOf(cd.getHocPhi()));
-        txtChuyenDe.setText(cd.getTenChuyenDe());
+        txtChuyenDe.setText(cd.getMaCD());
         txtGhiChu.setText(cd.getTenChuyenDe());
 
         fillTable();
@@ -542,21 +538,27 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
 
     KhoaHoc getForm() {
         KhoaHoc kh = new KhoaHoc();
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date;
         kh.setGhiChu(txtGhiChu.getText());
         kh.setHocPhi(Double.valueOf(txtHocPhi.getText()));
         kh.setMaCD(txtChuyenDe.getText());
         kh.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
         try {
-            kh.setNgayKG(XDate.toDate(txtNgayKhaiGiang.getText(), "dd-MM-yyyy"));
+            kh.setNgayKG(format.parse(txtNgayKhaiGiang.getText()));
             date = format.parse(txtNgayTao.getText());
             kh.setNgayTao(new java.sql.Date(date.getTime()));
         } catch (Exception e) {
-             MsgBox.alert(this, "Định dạng ngày tháng sai!");
-       e.printStackTrace();
+            MsgBox.alert(this, "Định dạng ngày tháng sai!");
+            e.printStackTrace();
         }
-  kh.setMaNV(txtNguoiTao.getText());
+        int row = tblGridView.getSelectedRow();
+        int maKH = 0;
+        if (maKH > 0) {
+            maKH = (int) tblGridView.getValueAt(row, 0);
+            kh.setMaKH(maKH);
+        }
+        kh.setMaNV(txtNguoiTao.getText());
         return kh;
     }
 
@@ -569,6 +571,7 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
             MsgBox.alert(this, "Thành công");
         } catch (Exception e) {
             MsgBox.alert(this, "Thất bại");
+            e.printStackTrace();
         }
     }
 
@@ -580,5 +583,14 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
         txtNgayTao.setText("");
         txtNguoiTao.setText("");
         txtThoiLuong.setText("");
+    }
+
+    void setUser() {
+        if (Auth.user != null) {
+            txtNguoiTao.setText(Auth.user.getMaNV());
+        } else {
+            txtNguoiTao.setText("???");
+            MsgBox.alert(this, "Bạn chưa đăng nhập");
+        }
     }
 }
