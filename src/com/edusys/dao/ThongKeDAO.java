@@ -4,16 +4,37 @@
  */
 package com.edusys.dao;
 
-import com.edusys.utils.JDBCHelper;
-import java.util.List;
-import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.sql.ResultSet;
+import com.edusys.utils.JDBCHelper;
 
-/**
- *
- * @author admin
- */
+
 public class ThongKeDAO {
+
+    public List<Object[]> getBangDiem(Integer makh) {
+        String sql = "{CALL sp_BangDiem(?)}";
+        String[] clos = {"MaNH", "HoTen", "Diem"};
+        return this.getListOfArray(sql, clos, makh);
+    }
+
+    public List<Object[]> getLuongNguoiHoc() {
+        String sql = "{CALL sp_ThongKeNguoiHoc()}";
+        String[] clos = {"Nam", "SoLuong", "DauTien", "CuoiCung"};
+        return this.getListOfArray(sql, clos);
+    }
+
+    public List<Object[]> getDiemChuyenDe() {
+        String sql = "{CALL sp_ThongKeDiem()}";
+        String[] clos = {"ChuyenDe", "SoHV", "ThapNhat", "CaoNhat", "TrungBinh"};
+        return this.getListOfArray(sql, clos);
+    }
+
+    public List<Object[]> getDoanhThu(Integer nam) {
+        String sql = "{CALL sp_ThongKeDoanhThu(?)}";
+        String[] clos = {"ChuyenDe", "SoKH", "SoHV", "DoanhThu", "ThapNhat", "CaoNhat", "TrungBinh"};
+        return this.getListOfArray(sql, clos, nam);
+    }
 
     private List<Object[]> getListOfArray(String sql, String[] cols, Object... args) {
         try {
@@ -23,42 +44,13 @@ public class ThongKeDAO {
                 Object[] vals = new Object[cols.length];
                 for (int i = 0; i < cols.length; i++) {
                     vals[i] = rs.getObject(cols[i]);
-
                 }
                 list.add(vals);
-
             }
             rs.getStatement().getConnection().close();
             return list;
         } catch (Exception e) {
-            throw new RuntimeException();
-
+            throw new RuntimeException(e);
         }
-    }
-
-    public List<Object[]> getBangDiem(Integer maKH) {
-        String sql = "{CALL sp_BangDiem(?)}";
-        String[] cols = {"MaNH", "HoTen", "Diem"};
-        return this.getListOfArray(sql, cols, maKH);
-
-    }
-
-    public List<Object[]> getLuongNguoiHoc() {
-        String sql = "{CALL sp_LuongNguoiHoc}";
-        String[] cols = {"Nam", "SoLuong", "DauTien", "CuoiCung"};
-        return this.getListOfArray(sql, cols);
-    }
-
-    public List<Object[]> getDiemChuyenDe() {
-        String sql = "{CALL sp_DiemChuyenDe}";
-        String[] cols = {"ChuyenDe", "SoHV", "CaoNhat", "ThapNhat", "TrungBinh"};
-        return this.getListOfArray(sql, cols);
-    }
-
-    public List<Object[]> getDoangThu(int nam) {
-        String sql = "{CALL sp_DoanhThu(?)}";
-        String[] cols = {"ChuyenDe", "SoKH", "SoHV", "DoanhThu", "ThapNhat", "CaoNhat","TrungBinh" };
-        
-        return this.getListOfArray(sql, cols, nam);
     }
 }

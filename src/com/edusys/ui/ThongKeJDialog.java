@@ -1,11 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package com.edusys.ui;
 
-import java.awt.Event;
-import javax.swing.text.TabSet;
+import com.edusys.dao.KhoaHocDAO;
+import com.edusys.dao.ThongKeDAO;
+import com.edusys.entity.KhoaHoc;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,11 +19,13 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     public ThongKeJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        init();
     }
 
-    public void selectTab(int index){
+    public void selectTab(int index) {
         tabs.setSelectedIndex(index);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -35,13 +37,13 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblNguoiHoc = new javax.swing.JTable();
         pnlBangDiem = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbbKhoaHoc = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblBangDiem = new javax.swing.JTable();
         pnlTongHop = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblTongHop = new javax.swing.JTable();
+        tblDiemChuyenDe = new javax.swing.JTable();
         pnlDoanhThu = new javax.swing.JPanel();
         lblNam = new javax.swing.JLabel();
         cbbNam = new javax.swing.JComboBox<>();
@@ -115,7 +117,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
         tabs.addTab("Người học", pnlNguoiHoc);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbKhoaHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setText("KHOÁ HỌC");
 
@@ -157,7 +159,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                     .addGroup(pnlBangDiemLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cbbKhoaHoc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlBangDiemLayout.setVerticalGroup(
@@ -165,7 +167,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
             .addGroup(pnlBangDiemLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlBangDiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbbKhoaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,7 +176,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
 
         tabs.addTab("Bảng điểm", pnlBangDiem);
 
-        tblTongHop.setModel(new javax.swing.table.DefaultTableModel(
+        tblDiemChuyenDe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -193,13 +195,13 @@ public class ThongKeJDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(tblTongHop);
-        if (tblTongHop.getColumnModel().getColumnCount() > 0) {
-            tblTongHop.getColumnModel().getColumn(0).setResizable(false);
-            tblTongHop.getColumnModel().getColumn(1).setResizable(false);
-            tblTongHop.getColumnModel().getColumn(2).setResizable(false);
-            tblTongHop.getColumnModel().getColumn(3).setResizable(false);
-            tblTongHop.getColumnModel().getColumn(4).setResizable(false);
+        jScrollPane3.setViewportView(tblDiemChuyenDe);
+        if (tblDiemChuyenDe.getColumnModel().getColumnCount() > 0) {
+            tblDiemChuyenDe.getColumnModel().getColumn(0).setResizable(false);
+            tblDiemChuyenDe.getColumnModel().getColumn(1).setResizable(false);
+            tblDiemChuyenDe.getColumnModel().getColumn(2).setResizable(false);
+            tblDiemChuyenDe.getColumnModel().getColumn(3).setResizable(false);
+            tblDiemChuyenDe.getColumnModel().getColumn(4).setResizable(false);
         }
 
         javax.swing.GroupLayout pnlTongHopLayout = new javax.swing.GroupLayout(pnlTongHop);
@@ -344,8 +346,8 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbbKhoaHoc;
     private javax.swing.JComboBox<String> cbbNam;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -360,8 +362,106 @@ public class ThongKeJDialog extends javax.swing.JDialog {
     private javax.swing.JPanel pnlTongHop;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblBangDiem;
+    private javax.swing.JTable tblDiemChuyenDe;
     private javax.swing.JTable tblDoanhThu;
     private javax.swing.JTable tblNguoiHoc;
-    private javax.swing.JTable tblTongHop;
     // End of variables declaration//GEN-END:variables
+
+    private ThongKeDAO tkdao = new ThongKeDAO();
+    private KhoaHocDAO khdao = new KhoaHocDAO();
+
+    int row = -1;
+
+    private void init() {
+        this.setLocationRelativeTo(null);
+        this.fillComboBoxKhoaHoc();
+        this.fillTableBangDiem();
+        this.fillTableLuongNguoiHoc();
+        this.fillTableDiemChuyenDe();
+        this.fillComboBoxNam();
+        this.fillTableDanhThu();
+        this.selectTap(0);
+    }
+
+    private void fillComboBoxKhoaHoc() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cbbKhoaHoc.getModel();
+        model.removeAllElements();
+        List<KhoaHoc> list = khdao.selectAll();
+        for (KhoaHoc kh : list) {
+            model.addElement(kh);
+        }
+    }
+
+    private void fillTableBangDiem() {
+        DefaultTableModel model = (DefaultTableModel) tblBangDiem.getModel();
+        model.setRowCount(0);
+        KhoaHoc khoaHoc = (KhoaHoc) cbbKhoaHoc.getSelectedItem();
+        List<Object[]> list = tkdao.getBangDiem(khoaHoc.getMaKH());
+        for (Object[] row : list) {
+            double diem = (double) row[2];
+            model.addRow(new Object[]{
+                row[0], row[1],
+                diem, getXepLoai(diem)});
+        }
+    }
+
+    private void fillTableLuongNguoiHoc() {
+        DefaultTableModel model = (DefaultTableModel) tblNguoiHoc.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = tkdao.getLuongNguoiHoc();
+        for (Object[] row : list) {
+            model.addRow(row);
+        }
+    }
+
+    private void fillTableDiemChuyenDe() {
+        DefaultTableModel model = (DefaultTableModel) tblDiemChuyenDe.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = tkdao.getDiemChuyenDe();
+        for (Object[] row : list) {
+            model.addRow(new Object[]{
+                row[0], row[1], row[2],
+                row[3], row[4]
+            });
+        }
+    }
+
+    private void fillComboBoxNam() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cbbNam.getModel();
+        model.removeAllElements();
+        List<Integer> list = khdao.selectYears();
+        for (Integer year : list) {
+            model.addElement(year);
+        }
+    }
+
+    private void fillTableDanhThu() {
+        DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
+        model.setRowCount(0);
+        int nam = (Integer) cbbNam.getSelectedItem();
+        List<Object[]> list = tkdao.getDoanhThu(nam);
+        for (Object[] row : list) {
+            model.addRow(row);
+        }
+    }
+
+    private void selectTap(int index) {
+        tabs.setSelectedIndex(index);
+    }
+      private String getXepLoai(double diem) {
+        if (diem < 5) {
+            return "Chưa đạt";
+        }
+        if (diem < 6.5) {
+            return "Trung bình";
+        }
+        if (diem < 7.5) {
+            return "Khá";
+        }
+        if (diem < 9.0) {
+            return "Giỏi";
+        }
+        return "Xuất sắc";
+    }
+
 }

@@ -210,7 +210,7 @@ public class LoginJDialog extends javax.swing.JDialog {
         NhanVien nv = dao.selectByID(maNV);
         if (nv == null) {
             MsgBox.alert(this, "Sai tên đăng nhập!");
-        } else if (!matKhau.equals(nv.getMaNV())) {
+        } else if (!matKhau.equals(nv.getMatKhau())) {
             MsgBox.alert(this, "Sai mật khẩu");
         }else {
             Auth.user = nv;

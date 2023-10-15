@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package com.edusys.ui;
 
 import com.edusys.dao.ChuyenDeDAO;
@@ -11,6 +7,7 @@ import com.edusys.entity.KhoaHoc;
 import com.edusys.utils.Auth;
 import com.edusys.utils.MsgBox;
 import com.edusys.utils.XDate;
+import com.toedter.calendar.JCalendar;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +38,6 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtChuyenDe = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtNgayKhaiGiang = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtHocPhi = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -63,6 +59,7 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
         btnLast = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblGridView = new javax.swing.JTable();
+        dchNgayKG = new com.toedter.calendar.JDateChooser();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -231,15 +228,15 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
                             .addComponent(txtHocPhi)
                             .addComponent(txtNguoiTao)
                             .addComponent(txtChuyenDe, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtNgayTao, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel5)
+                                .addComponent(txtNgayTao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                                 .addComponent(txtThoiLuong, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtNgayKhaiGiang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)))
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7))
+                            .addComponent(dchNgayKG, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnInsert)
@@ -249,7 +246,7 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
                         .addComponent(btnDelete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnClear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
                         .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPrev, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,15 +269,15 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNgayKhaiGiang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(dchNgayKG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtThoiLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(12, 12, 12)
                         .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -408,6 +405,7 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnPrev;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cbbChuyenDe;
+    private com.toedter.calendar.JDateChooser dchNgayKG;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -426,7 +424,6 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
     private javax.swing.JTextField txtChuyenDe;
     private javax.swing.JTextArea txtGhiChu;
     private javax.swing.JTextField txtHocPhi;
-    private javax.swing.JTextField txtNgayKhaiGiang;
     private javax.swing.JTextField txtNgayTao;
     private javax.swing.JTextField txtNguoiTao;
     private javax.swing.JTextField txtThoiLuong;
@@ -442,6 +439,12 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
         //fillTable();
         fillComboxChuyenDe();
         this.setUser();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        if (txtNgayTao.getText() == null || txtNgayTao.getText().trim().isEmpty()) {
+            // Set giá trị cho lblNgayTao là ngày hiện tại
+            txtNgayTao.setText(format.format(new Date()));
+        }
     }
 
     void fillComboxChuyenDe() { //đổ data vào cbb
@@ -464,7 +467,7 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
 
         fillTable();
         this.row = -1;
-        //upDateStatus();
+       
 
     }
 
@@ -494,10 +497,10 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
     }
 
     void edit() {
-        String maKH = tblGridView.getValueAt(row, 0).toString();
+        Integer maKH = (Integer) tblGridView.getValueAt(row, 0);
         KhoaHoc kh = khdao.selectByID(maKH);
         this.setForm(kh);
-        //tabs.setSelectedIndex(0);
+       
 
     }
 
@@ -506,7 +509,7 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
         txtHocPhi.setText(kh.getHocPhi() + "");
         txtNguoiTao.setText(kh.getMaNV());
         txtGhiChu.setText(kh.getGhiChu());
-        txtNgayKhaiGiang.setText(kh.getNgayKG().toString());
+        dchNgayKG.setDate(kh.getNgayKG());
         txtThoiLuong.setText(kh.getThoiLuong() + "");
         txtHocPhi.setText(kh.getHocPhi() + "");
         txtNgayTao.setText(kh.getNgayTao() + "");
@@ -536,27 +539,25 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
         this.edit();
     }
 
-    KhoaHoc getForm() {
+    private KhoaHoc getForm() {
         KhoaHoc kh = new KhoaHoc();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date;
         kh.setGhiChu(txtGhiChu.getText());
         kh.setHocPhi(Double.valueOf(txtHocPhi.getText()));
         kh.setMaCD(txtChuyenDe.getText());
         kh.setThoiLuong(Integer.valueOf(txtThoiLuong.getText()));
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date date;
         try {
-            kh.setNgayKG(format.parse(txtNgayKhaiGiang.getText()));
+            // Chuyển text --> đối tượng java.util.Date
+            java.util.Date uDate = dchNgayKG.getDate();
+            // Chuyển util.Date --> sql.Date
+            kh.setNgayKG(new java.sql.Date(uDate.getTime()));
+
             date = format.parse(txtNgayTao.getText());
             kh.setNgayTao(new java.sql.Date(date.getTime()));
+
         } catch (Exception e) {
             MsgBox.alert(this, "Định dạng ngày tháng sai!");
-            e.printStackTrace();
-        }
-        int row = tblGridView.getSelectedRow();
-        int maKH = 0;
-        if (maKH > 0) {
-            maKH = (int) tblGridView.getValueAt(row, 0);
-            kh.setMaKH(maKH);
         }
         kh.setMaNV(txtNguoiTao.getText());
         return kh;
@@ -579,7 +580,7 @@ public class QuanLyKhoaHocJDialog extends javax.swing.JDialog {
         txtChuyenDe.setText("");
         txtGhiChu.setText("");
         txtHocPhi.setText("");
-        txtNgayKhaiGiang.setText("");
+ 
         txtNgayTao.setText("");
         txtNguoiTao.setText("");
         txtThoiLuong.setText("");

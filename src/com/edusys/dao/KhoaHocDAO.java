@@ -5,14 +5,15 @@ import com.edusys.utils.JDBCHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
  * @author admin
  */
-public class KhoaHocDAO extends EduSysDAO<KhoaHoc, String> {
+public class KhoaHocDAO extends EduSysDAO<KhoaHoc, Integer> {
 
-    String insert_sql = "INSERT INTO KhoaHoc (MaKH, MaCD, HocPhi, ThoiLuong, NgayKG, GhiChu, MaNV, NgayTao) VALUES (?,?,?,?,?,?,?,?)";
+    String insert_sql = "INSERT INTO KhoaHoc ( MaCD, HocPhi, ThoiLuong, NgayKG, GhiChu, MaNV, NgayTao) VALUES (?,?,?,?,?,?,?)";
     String update_sql = " UPDATE KhoaHoc SET MaCD =?, HocPhi =?, ThoiLuong =?, NgayKG =?, GhiChu =?, MaNV =?, NgayTao =? where MaKH = ?";
     String delete_sql = "DELETE FROM KhoaHoc where MaKH = ?";
     String select_all_sql = "select * from KhoaHoc";
@@ -21,7 +22,7 @@ public class KhoaHocDAO extends EduSysDAO<KhoaHoc, String> {
     @Override
     public void insert(KhoaHoc kh) {
         JDBCHelper.update(insert_sql,
-                kh.getMaKH(),
+                
                 kh.getMaCD(),
                 kh.getHocPhi(),
                 kh.getThoiLuong(),
@@ -47,7 +48,7 @@ public class KhoaHocDAO extends EduSysDAO<KhoaHoc, String> {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         JDBCHelper.update(delete_sql, id);
     }
 
@@ -56,8 +57,7 @@ public class KhoaHocDAO extends EduSysDAO<KhoaHoc, String> {
         return this.selectBySQL(select_all_sql);
     }
 
-    @Override
-    public KhoaHoc selectByID(String id) {
+    public KhoaHoc selectByID(Integer id) {
         List<KhoaHoc> listKH = this.selectBySQL(selectByIDSQL, id);
         if (listKH.isEmpty()) {
             return null;
@@ -95,5 +95,28 @@ public class KhoaHocDAO extends EduSysDAO<KhoaHoc, String> {
         String sql = "SELECT * FROM KhoaHoc WHERE MaCD = ?";
         return this.selectBySQL(sql, maCD);
     }
+
+ 
+      public List<Integer> selectYears() {
+        String sql = """
+                    SELECT DISTINCT YEAR(NgayKG) AS Year
+                    FROM KhoaHoc 
+                    ORDER BY Year DESC
+                     """;
+
+        List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet rs = JDBCHelper.query(sql);
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+ 
 
 }
