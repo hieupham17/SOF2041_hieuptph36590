@@ -25,10 +25,10 @@ public class NhanVienDAO extends EduSysDAO<NhanVien, String> {
 
     @Override
     public void insert(NhanVien entity) {
-        JDBCHelper.update(insert_sql, 
-                entity.getMaNV(), 
-                entity.getHoTen(), 
-                entity.getMatKhau(), 
+        JDBCHelper.update(insert_sql,
+                entity.getMaNV(),
+                entity.getMatKhau(),
+                entity.getHoTen(),
                 entity.isVaiTro());
     }
 
@@ -51,7 +51,7 @@ public class NhanVienDAO extends EduSysDAO<NhanVien, String> {
     public NhanVien selectByID(String id) {
         List<NhanVien> listNV = this.selectBySQL(selectByIDSQL, id);
         if (listNV.isEmpty()) {
-            return null ;
+            return null;
         }
         return listNV.get(0);
     }
@@ -61,7 +61,7 @@ public class NhanVienDAO extends EduSysDAO<NhanVien, String> {
         List<NhanVien> listNV = new ArrayList<>();
         try {
             ResultSet rs = JDBCHelper.query(sql, args);
-            while (rs.next()) {                
+            while (rs.next()) {
                 NhanVien nv = new NhanVien();
                 nv.setMaNV(rs.getString("MANV"));
                 nv.setHoTen(rs.getString("HOTEN"));
@@ -71,7 +71,7 @@ public class NhanVienDAO extends EduSysDAO<NhanVien, String> {
             }
             rs.getStatement().getConnection().close();
             return listNV;
-            
+
         } catch (Exception e) {
             throw new RuntimeException();
         }

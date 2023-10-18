@@ -439,6 +439,7 @@ public class ThongKeJDialog extends javax.swing.JDialog {
         DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
         model.setRowCount(0);
         int nam = (Integer) cbbNam.getSelectedItem();
+        System.out.print(nam);
         List<Object[]> list = tkdao.getDoanhThu(nam);
         for (Object[] row : list) {
             model.addRow(row);
